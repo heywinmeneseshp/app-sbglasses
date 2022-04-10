@@ -13,4 +13,4 @@ const addProduct = async (body) => {
   return response.data;
 };
 
-export { addProduct };
+export { addProduct }; 
