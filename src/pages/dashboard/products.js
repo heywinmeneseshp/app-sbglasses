@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { CheckIcon } from '@heroicons/react/solid';
+import { CheckIcon, XCircleIcon } from '@heroicons/react/solid';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import axios from 'axios';
 import endPoints from '@services/api';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
+import { delectProduct } from '@services/api/products';
 
 export default function products() {
   const [open, setOpen] = useState(false);
@@ -15,18 +16,29 @@ export default function products() {
   useEffect(() => {
     async function getProducts() {
       const response = await axios.get(endPoints.products.getAllProducts);
-      setProducts(response.data)
+      setProducts(response.data);
     }
     try {
       getProducts();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, [alert]);
+
+  const handleDelete = (id) => {
+    delectProduct(id).then(() => {
+      setAlert({
+        active: true,
+        message: 'Producto eleminado exitosamente',
+        type: 'error',
+        autoClose: true,
+      });
+    });
+  };
 
   return (
     <>
-    <Alert alert={alert} handleClose={toggleAlert}/>
+      <Alert alert={alert} handleClose={toggleAlert} />
       <div className="lg:flex lg:items-center lg:justify-between mb-8">
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">List of Products</h2>
@@ -98,9 +110,7 @@ export default function products() {
                         </a>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
-                        </a>
+                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />
                       </td>
                     </tr>
                   ))}
@@ -111,7 +121,7 @@ export default function products() {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <FormProduct setOpen={setOpen} setAlert={setAlert}/>
+        <FormProduct setOpen={setOpen} setAlert={setAlert} />
       </Modal>
     </>
   );
