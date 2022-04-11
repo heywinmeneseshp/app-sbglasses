@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { CheckIcon, XCircleIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import axios from 'axios';
 import endPoints from '@services/api';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
-import { delectProduct } from '@services/api/products';
+import { deleteProduct } from '@services/api/products';
 
-export default function products() {
+export default function Products() {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const { alert, setAlert, toggleAlert } = useAlert();
@@ -26,10 +27,10 @@ export default function products() {
   }, [alert]);
 
   const handleDelete = (id) => {
-    delectProduct(id).then(() => {
+    deleteProduct(id).then(() => {
       setAlert({
         active: true,
-        message: 'Producto eleminado exitosamente',
+        message: 'Delete product successfully',
         type: 'error',
         autoClose: true,
       });
@@ -105,9 +106,9 @@ export default function products() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
+                        <Link href={`/dashboard/edit/${product.id}`} className="text-indigo-600 hover:text-indigo-900">
                           Edit
-                        </a>
+                        </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />
