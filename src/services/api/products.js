@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import endPoints from '@services/api';
 
@@ -27,6 +26,6 @@ const updateProduct = async (id, body) => {
 const deleteProduct = async (id) => {
   const response = await axios.delete(endPoints.products.deleteProduct(id));
   return response.data;
-}
+};
 
-export { addProduct, deleteProduct, updateProduct }; 
+export { addProduct, deleteProduct, updateProduct };
