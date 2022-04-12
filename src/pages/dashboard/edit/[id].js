@@ -3,6 +3,7 @@ import FormProduct from '@components/FormProduct';
 import { useRouter } from 'next/router';
 import endPoints from '@services/api';
 import axios from 'axios';
+import SecondLayout from '@layout/SecondLayout';
 
 export default function Edit() {
   const [product, setProduct] = useState({});
@@ -17,5 +18,9 @@ export default function Edit() {
     }
     getProduct();
   }, [router?.isReady]);
-  return <FormProduct product={product} />;
+  return (
+    <SecondLayout>
+      <FormProduct product={product} />;
+    </SecondLayout>
+  );
 }
