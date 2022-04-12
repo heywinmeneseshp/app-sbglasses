@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
 import endPoints from '@services/api/index';
 import useFetch from '@hooks/useFetch';
 import SecondLayout from '@layout/SecondLayout';
 import { Chart } from '@common/Chart';
 
 const PRODUCT_LIMIT = 5;
-
 
 export default function Dashboard() {
   const [products, setProducts] = useState([]);
@@ -88,8 +88,6 @@ export default function Dashboard() {
     setButton3(button3 * 1 + 2);
   };
 
-
-
   //Contoeo de ocurrencias
   const countOccurrences = (array) => array.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
   const data = {
@@ -125,8 +123,9 @@ export default function Dashboard() {
             </div>
             <div>
               <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                <span
+                <button
                   onClick={handlePrev}
+                  onKeyDown={handlePrev}
                   className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
                   <span className="sr-only">Previous</span>
@@ -134,72 +133,78 @@ export default function Dashboard() {
                   <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                </span>
+                </button>
 
                 {!(button1 <= 1) && (
-                  <span
+                  <button
                     onClick={handleInit}
+                    onKeyDown={handleInit}
                     aria-current="page"
                     className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                   >
                     {' '}
                     {'...'}{' '}
-                  </span>
+                  </button>
                 )}
                 {!(button1 <= 1) && (
-                  <span
+                  <button
                     onClick={handlePrev}
+                    onKeyDown={handlePrev}
                     aria-current="page"
                     className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                   >
                     {' '}
                     {button0}{' '}
-                  </span>
+                  </button>
                 )}
-                <span aria-current="page" className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                <button aria-current="page" className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
                   {' '}
                   {button1}{' '}
-                </span>
+                </button>
                 {!(button1 == parts * 1 - 2) && (
-                  <span
+                  <button
                     onClick={handleNext}
+                    onKeyDown={handleNext}
                     aria-current="page"
                     className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                   >
                     {' '}
                     {button2}{' '}
-                  </span>
+                  </button>
                 )}
                 {!(button1 >= parts * 1 - 3) && (
-                  <span
+                  <button
                     onClick={handleButton3}
+                    onKeyDown={handleButton3}
                     aria-current="page"
                     className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                   >
                     {' '}
                     {button3}{' '}
-                  </span>
+                  </button>
                 )}
                 {!(button1 >= parts * 1 - 3) && (
-                  <span
+                  <button
                     onClick={handleFinish}
+                    onKeyDown={handleFinish}
                     aria-current="page"
                     className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                   >
                     {' '}
                     {'...'}{' '}
-                  </span>
+                  </button>
                 )}
 
-                <span
+                <button
                   onClick={handleNext}
+                  onKeyDown={handleNext}
                   className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
                   <span className="sr-only">Next</span>
                   <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
-                </span>
+                </button>
               </nav>
             </div>
           </div>
@@ -238,7 +243,7 @@ export default function Dashboard() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="flex-shrink-0 h-10 w-10">
-                              <img className="h-10 w-10 rounded-full" src={product.images[0]} alt="" />
+                              <Image width={50} height={50} className="h-10 w-10 rounded-full" src={product.images[0]} alt="" />
                             </div>
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">{product.title}</div>
