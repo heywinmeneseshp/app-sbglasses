@@ -10,6 +10,8 @@
             "@layout/*": ["layout/*"],
             "@hooks/*": ["hooks/*"],
             "@services/*": ["services/*"],
+            "@images/*": ["public/images/*"],
+            "@logos/*": ["public/logos/*"],
         }
     }
 }
