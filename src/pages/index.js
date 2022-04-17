@@ -26,7 +26,7 @@ export default function Home() {
                   <div className="flex items-center justify-between w-full md:w-auto">
                     <div href="/login">
                       <span className="sr-only">Workflow</span>
-                      <Image width={75} height={40} className="h-8 w-auto sm:h-10" src={"/logos/sb_logo.png"} />
+                      <Image width={75} height={40} className="h-8 w-auto sm:h-10" src={'/logos/sb_logo.png'} />
                     </div>
                     <div className="-mr-2 flex items-center md:hidden">
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -36,9 +36,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                  
-                </div>
+                <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8"></div>
               </nav>
             </div>
 
@@ -80,14 +78,11 @@ export default function Home() {
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
-                <Link href="/login">
-                  <div
-                    
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-                  >
-                    Login
-                  </div>
-               </Link>
+                  <Link href="/login">
+                    <div className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                      Login
+                    </div>
+                  </Link>
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <div
@@ -103,12 +98,7 @@ export default function Home() {
         </div>
       </div>
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <Image
-          layout='fill'
-          objectFit='cover'
-          src="/images/chica_lentes.jpeg"
-          alt=""
-        />
+        <Image layout="fill" objectFit="cover" src="/images/chica_lentes.jpeg" alt="" />
       </div>
     </div>
   );
